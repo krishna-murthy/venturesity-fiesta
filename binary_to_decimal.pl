@@ -17,20 +17,41 @@ As the program is very simple, you will be judged extensively on validation of u
 
 use strict;
 
+# Get the input from user
 print("Please enter number:");
 
 my $input = <STDIN>;
-chomp($input);
 
+# check if the entered value is a binary number. Else throw a message and exit from the program.
 if($input !~ /^[01]+$/) {
     print "Value entered should be in binary only with 0s and 1s. Example: 1001\n";
     exit;
 }
 
+# Remove trailing whitespaces
+chomp($input);
+
+# Boundary condition as specified in the problem statement.
 if ($input > 11111111) {
     print "Value entered is greater than the expected input. Enter lesser value\n";
     exit;
 }
+
+=head
+ Perform the operation to convert binary to decimal.
+ Plain mathematical logic
+ 1    1   0
+ |    |   |
+ |    |   |
+ |    |   ____ 0 * 2^0 = 0
+ |    |
+ |    ________ 1 * 2^1 = 2
+ |
+ _____________ 1 * 2^2 = 4
+ 110 => 0 + 2 + 4 = 6
+=cut
+
+# Traverse from the end of the input and perform exponentiation on 2 with a counter starting from 0.
 
 my @array = split('', $input);
 my $result = 0;
